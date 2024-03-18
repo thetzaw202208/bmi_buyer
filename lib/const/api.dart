@@ -1,7 +1,7 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 ///Base URL
-const String baseURL = "https://bmiagri.com/api/v1/";
+ String baseURL = dotenv.get("baseURL", fallback: null);
 
 ///Endpoint
 const String registerEndpoint = "buyers/register";

@@ -22,7 +22,7 @@ class GetOrderListDataAgentImpl extends GetOrderListDataAgent {
       'Content-Type': contentType,
       'Authorization': "Bearer $authorizationToken"
     }));
-    _api = ApiService(dio);
+    _api = ApiService(dio,baseUrl: baseURL);
   }
 
   @override

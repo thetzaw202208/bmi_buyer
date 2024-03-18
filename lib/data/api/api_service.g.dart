@@ -12,9 +12,7 @@ class _ApiService implements ApiService {
   _ApiService(
     this._dio, {
     this.baseUrl,
-  }) {
-    baseUrl ??= 'https://bmiagri.com/api/v1/';
-  }
+  });
 
   final Dio _dio;
 
@@ -32,12 +30,7 @@ class _ApiService implements ApiService {
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{
-      r'Content-Type': 'application/json',
-      r'Authorization':
-          'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2JtaWFncmkuY29tL2FwaS9sb2dpbiIsImlhdCI6MTcwOTg3MjI2NSwibmJmIjoxNzA5ODcyMjY1LCJqdGkiOiJ2UjFQTVpwTktrelRZU2pvIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.70rDlI1IHMF33ot4_Knl98oSW8VYczGsILY5rKN2IOU',
-    };
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     final _data = {
       'name': name,
       'phone_no': phoneNumber,
@@ -52,7 +45,6 @@ class _ApiService implements ApiService {
       method: 'POST',
       headers: _headers,
       extra: _extra,
-      contentType: 'application/json',
     )
             .compose(
               _dio.options,
@@ -76,12 +68,7 @@ class _ApiService implements ApiService {
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{
-      r'Content-Type': 'application/json',
-      r'Authorization':
-          'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2JtaWFncmkuY29tL2FwaS9sb2dpbiIsImlhdCI6MTcwOTg3MjI2NSwibmJmIjoxNzA5ODcyMjY1LCJqdGkiOiJ2UjFQTVpwTktrelRZU2pvIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.70rDlI1IHMF33ot4_Knl98oSW8VYczGsILY5rKN2IOU',
-    };
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     final _data = {
       'phone_no': phoneNumber,
       'password': password,
@@ -91,7 +78,6 @@ class _ApiService implements ApiService {
       method: 'POST',
       headers: _headers,
       extra: _extra,
-      contentType: 'application/json',
     )
             .compose(
               _dio.options,
@@ -112,19 +98,13 @@ class _ApiService implements ApiService {
   Future<GetProductResponseVo> getProduct(int buyerID) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{
-      r'Content-Type': 'application/json',
-      r'Authorization':
-          'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2JtaWFncmkuY29tL2FwaS9sb2dpbiIsImlhdCI6MTcwOTg3MjI2NSwibmJmIjoxNzA5ODcyMjY1LCJqdGkiOiJ2UjFQTVpwTktrelRZU2pvIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.70rDlI1IHMF33ot4_Knl98oSW8VYczGsILY5rKN2IOU',
-    };
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     final _data = {'buyer_id': buyerID};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<GetProductResponseVo>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
-      contentType: 'application/json',
     )
             .compose(
               _dio.options,
@@ -148,12 +128,7 @@ class _ApiService implements ApiService {
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{
-      r'Content-Type': 'application/json',
-      r'Authorization':
-          'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2JtaWFncmkuY29tL2FwaS9sb2dpbiIsImlhdCI6MTcwOTg3MjI2NSwibmJmIjoxNzA5ODcyMjY1LCJqdGkiOiJ2UjFQTVpwTktrelRZU2pvIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.70rDlI1IHMF33ot4_Knl98oSW8VYczGsILY5rKN2IOU',
-    };
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     final _data = {
       'orders': orders,
       'products': products,
@@ -163,7 +138,6 @@ class _ApiService implements ApiService {
       method: 'POST',
       headers: _headers,
       extra: _extra,
-      contentType: 'application/json',
     )
             .compose(
               _dio.options,
@@ -184,19 +158,13 @@ class _ApiService implements ApiService {
   Future<OrderListResponseVo> getProductOrderList(int buyerID) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{
-      r'Content-Type': 'application/json',
-      r'Authorization':
-          'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2JtaWFncmkuY29tL2FwaS9sb2dpbiIsImlhdCI6MTcwOTg3MjI2NSwibmJmIjoxNzA5ODcyMjY1LCJqdGkiOiJ2UjFQTVpwTktrelRZU2pvIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.70rDlI1IHMF33ot4_Knl98oSW8VYczGsILY5rKN2IOU',
-    };
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     final _data = {'buyer_id': buyerID};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<OrderListResponseVo>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
-      contentType: 'application/json',
     )
             .compose(
               _dio.options,

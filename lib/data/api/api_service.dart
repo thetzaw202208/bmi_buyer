@@ -9,9 +9,9 @@ import 'package:retrofit/http.dart';
 import '../../const/api.dart';
 import '../request_vo/product_order_request_vo.dart';
 part 'api_service.g.dart';
-@RestApi(baseUrl: baseURL)
+@RestApi()
 abstract class ApiService {
-  factory ApiService(Dio dio) = _ApiService;
+  factory ApiService(Dio dio,{String baseUrl}) = _ApiService;
 
   ///Register
 

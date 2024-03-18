@@ -2,6 +2,7 @@ import 'package:bmi_buyer/data/network/data_agents/register/register_data_agent.
 import 'package:bmi_buyer/data/response_vo/register_response_vo.dart';
 import 'package:dio/dio.dart';
 
+import '../../../../const/api.dart';
 import '../../../api/api_service.dart';
 
 class RegisterDataAgentImpl extends RegisterDataAgent {
@@ -15,7 +16,10 @@ class RegisterDataAgentImpl extends RegisterDataAgent {
   }
 
   RegisterDataAgentImpl._internal() {
-    final dio = Dio();
+    final dio = Dio(BaseOptions(headers: <String, String>{
+      'Content-Type': contentType,
+      'Authorization': "Bearer $authorizationToken"
+    }));
     _api = ApiService(dio);
   }
 

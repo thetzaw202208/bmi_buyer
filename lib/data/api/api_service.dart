@@ -9,16 +9,12 @@ import 'package:retrofit/http.dart';
 import '../../const/api.dart';
 import '../request_vo/product_order_request_vo.dart';
 part 'api_service.g.dart';
-
 @RestApi(baseUrl: baseURL)
 abstract class ApiService {
   factory ApiService(Dio dio) = _ApiService;
 
   ///Register
-  @Headers(<String, String>{
-    'Content-Type': contentType,
-    'Authorization': authorizationToken
-  })
+
   @POST(registerEndpoint)
   Future<RegisterVo> registerUser(
     @Field("name") String name,
@@ -32,10 +28,7 @@ abstract class ApiService {
 
 
   ///Login
-  @Headers(<String, String>{
-    'Content-Type': contentType,
-    'Authorization': authorizationToken
-  })
+
   @POST(loginEndpoint)
   Future<LoginResponseVo> login(
 
@@ -45,10 +38,7 @@ abstract class ApiService {
       );
 
   ///get Product
-  @Headers(<String, String>{
-    'Content-Type': contentType,
-    'Authorization': authorizationToken
-  })
+
   @POST(getProductEndpoint)
   Future<GetProductResponseVo> getProduct(
 
@@ -59,10 +49,7 @@ abstract class ApiService {
 
 
   /// Product order
-  @Headers(<String, String>{
-    'Content-Type': contentType,
-    'Authorization': authorizationToken
-  })
+
   @POST(orderEndpoint)
   Future<ProductOrderResponseVo> productOrder(
 
@@ -74,10 +61,7 @@ abstract class ApiService {
 
 
   ///get Product order List
-  @Headers(<String, String>{
-    'Content-Type': contentType,
-    'Authorization': authorizationToken
-  })
+
   @POST(getOrderHistoryEndpoint)
   Future<OrderListResponseVo> getProductOrderList(
 

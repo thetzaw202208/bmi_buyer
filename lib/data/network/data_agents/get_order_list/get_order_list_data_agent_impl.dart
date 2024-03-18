@@ -4,6 +4,7 @@ import 'package:bmi_buyer/data/network/data_agents/get_order_list/get_order_list
 import 'package:bmi_buyer/data/response_vo/order_list_response_vo.dart';
 import 'package:dio/dio.dart';
 
+import '../../../../const/api.dart';
 import '../../../api/api_service.dart';
 
 class GetOrderListDataAgentImpl extends GetOrderListDataAgent {
@@ -17,7 +18,10 @@ class GetOrderListDataAgentImpl extends GetOrderListDataAgent {
   }
 
   GetOrderListDataAgentImpl._internal() {
-    final dio = Dio();
+    final dio = Dio(BaseOptions(headers: <String, String>{
+      'Content-Type': contentType,
+      'Authorization': "Bearer $authorizationToken"
+    }));
     _api = ApiService(dio);
   }
 

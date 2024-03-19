@@ -1,7 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bmi_buyer/custom_drawer.dart';
-import 'package:bmi_buyer/data/response_vo/get_product_response_vo.dart';
-import 'package:bmi_buyer/provider/cart_provider.dart';
 import 'package:bmi_buyer/provider/get_product_provider.dart';
 import 'package:bmi_buyer/screen/buying_process/buyer_details.dart';
 import 'package:bmi_buyer/screen/shopping_cart/shopping_cart.dart';
@@ -78,7 +76,7 @@ class _BuyerGoodsTypeState extends State<BuyerGoodsType> {
                       ),
                     )),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 30,
               ),
               GestureDetector(
@@ -160,7 +158,7 @@ class _BuyerGoodsTypeState extends State<BuyerGoodsType> {
                                   ),
                                 )),
                       )
-                    : Center(
+                    : const Center(
                         child: ReusableText(
                           reuseText: "ဒေတာ မရှိပါ",
                         ),

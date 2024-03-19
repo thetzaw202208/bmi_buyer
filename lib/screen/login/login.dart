@@ -4,7 +4,6 @@ import 'package:bmi_buyer/provider/login_provider.dart';
 import 'package:bmi_buyer/reusable_button.dart';
 import 'package:bmi_buyer/reusable_text.dart';
 import 'package:bmi_buyer/reusable_textField.dart';
-import 'package:bmi_buyer/screen/buying_process/buyer_goods_type.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -36,23 +35,35 @@ class LoginScreen extends StatelessWidget {
                   height: 30,
                 ),
                  ReusableTextField(
+
                   hintText: "ဖုန်းနံပါတ်ထည့်ပါ",
                   keyboardType: TextInputType.phone,
                   textEditingController:loginProvider.phoneController,
                   borderColor: kLoginBorderColor,
                   borderRadius: kLargeBorderRadius,
-                  prefixIcon: Opacity(opacity: 0.5, child: Icon(Icons.person)),
+                  prefixIcon: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+SizedBox(width: 10,),
+                      const Opacity(opacity: 0.5, child: Icon(Icons.phone)),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                        child: ReusableText(reuseText: "09",fSize: 16,fWeight: FontWeight.w600,),
+                      )
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 30,
                 ),
                  ReusableTextField(
+
                   hintText: "လျှို့ဝှက်နံပါတ်ထည့်ပါ",
                   obs: true,
                   textEditingController:loginProvider.passwordController,
                   borderColor: kLoginBorderColor,
                   borderRadius: kLargeBorderRadius,
-                  prefixIcon: Opacity(opacity: 0.5, child: Icon(Icons.lock)),
+                  prefixIcon: const Opacity(opacity: 0.5, child: Icon(Icons.lock)),
                 ),
                 const SizedBox(
                   height: 5,

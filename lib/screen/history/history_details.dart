@@ -1,9 +1,7 @@
 import 'package:bmi_buyer/const/img.dart';
 import 'package:bmi_buyer/data/response_vo/order_list_response_vo.dart';
 import 'package:dotted_line/dotted_line.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../../const/color.dart';
 import '../../reusable_text.dart';
@@ -87,7 +85,7 @@ class HistoryDetails extends StatelessWidget {
                             height: orderList.length>8? MediaQuery.of(context).size.height*.3: MediaQuery.of(context).size.height*.2,
                             width: MediaQuery.of(context).size.width*.2,
                             child: ListView.builder(
-                              physics: NeverScrollableScrollPhysics(),
+                              physics: const NeverScrollableScrollPhysics(),
                               scrollDirection: Axis.vertical,
                               itemCount: orderList.length,
                               itemBuilder: (context, index) => ReusableText(
@@ -101,7 +99,7 @@ class HistoryDetails extends StatelessWidget {
                             height: orderList.length>8? MediaQuery.of(context).size.height*.3: MediaQuery.of(context).size.height*.2,
                             width: MediaQuery.of(context).size.width*.3,
                             child: ListView.builder(
-                              physics: NeverScrollableScrollPhysics(),
+                              physics: const NeverScrollableScrollPhysics(),
                               scrollDirection: Axis.vertical,
                               itemCount: orderList.length,
                               itemBuilder: (context, index) => ReusableText(
@@ -116,7 +114,7 @@ class HistoryDetails extends StatelessWidget {
                             height:orderList.length>8? MediaQuery.of(context).size.height*.3: MediaQuery.of(context).size.height*.2,
                             width: MediaQuery.of(context).size.width*.3,
                             child: ListView.builder(
-                              physics: NeverScrollableScrollPhysics(),
+                              physics: const NeverScrollableScrollPhysics(),
                               scrollDirection: Axis.vertical,
                               itemCount: orderList.length,
                               itemBuilder: (context, index) => ReusableText(

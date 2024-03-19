@@ -1,8 +1,5 @@
-import 'package:bmi_buyer/provider/cart_provider.dart';
 import 'package:bmi_buyer/provider/get_product_provider.dart';
-import 'package:bmi_buyer/screen/buying_process/buyer_process_success.dart';
 import 'package:dotted_line/dotted_line.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

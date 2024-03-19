@@ -3,6 +3,7 @@
 
 import 'package:bmi_buyer/provider/get_product_provider.dart';
 import 'package:bmi_buyer/screen/login/login.dart';
+import 'package:bmi_buyer/screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
@@ -49,7 +50,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const LoginScreen(),
+        home: const SplashScreen(),
       ),
     );
   }

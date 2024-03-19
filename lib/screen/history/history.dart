@@ -1,11 +1,8 @@
-import 'package:bmi_buyer/provider/cart_provider.dart';
 import 'package:bmi_buyer/provider/get_order_list_provider.dart';
 import 'package:bmi_buyer/reusable_text.dart';
 import 'package:bmi_buyer/screen/buying_process/buyer_goods_type.dart';
 import 'package:bmi_buyer/screen/history/history_details.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:rotated_corner_decoration/rotated_corner_decoration.dart';
 
@@ -119,11 +116,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                   // ReusableText(
                                   //     reuseText: value
                                   //         .orderList?[index].deliveryAddress),
-                                  ReusableText(
+                                  const ReusableText(
                                     reuseText: "ရက်စွဲ",
                                     fWeight: FontWeight.bold,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 70,
                                   ),
                                   ReusableText(
@@ -136,17 +133,17 @@ class _HistoryScreenState extends State<HistoryScreen> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  ReusableText(
+                                  const ReusableText(
                                       reuseText: "လိပ်စာ",
                                       fWeight: FontWeight.bold),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 70,
                                   ),
                                   ReusableText(
                                       align: TextAlign.start,
                                       reuseText: value
                                           .orderList?[index].deliveryAddress),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 80,
                                   ),
                                 ],
@@ -172,7 +169,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                               )),
                                       (Route<dynamic> route) => true);
                                 },
-                                child: Align(
+                                child: const Align(
                                     alignment: Alignment.centerRight,
                                     child: ReusableText(
                                       reuseText: "အသေးစိတ်ကြည့်ရန်",

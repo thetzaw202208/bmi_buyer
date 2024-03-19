@@ -1,4 +1,4 @@
-const String bmiLogo="assets/images/BMi_Profile_logo.png";
+const String kbLogo="assets/images/KB_Rice_Logo-01.png";
 const String sellerImg="assets/images/seller.png";
 const String buyerImg="assets/images/buyer.png";
 const String retailImg="assets/images/retail.png";

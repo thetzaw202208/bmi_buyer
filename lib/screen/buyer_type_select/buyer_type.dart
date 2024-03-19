@@ -1,8 +1,5 @@
-import 'package:bmi_buyer/screen/buying_process/buyer_goods_type.dart';
-import 'package:bmi_buyer/screen/history/history.dart';
 import 'package:bmi_buyer/screen/register/register.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 
 import '../../const/color.dart';
 import '../../const/dimen.dart';

@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 
 import '../../const/color.dart';
 import '../../reusable_button.dart';
-import '../buyer_type_select/buyer_type.dart';
 
 class BuyProcessSuccess extends StatefulWidget {
   const BuyProcessSuccess({super.key});

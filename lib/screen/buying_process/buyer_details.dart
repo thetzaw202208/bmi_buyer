@@ -1,19 +1,15 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bmi_buyer/const/dimen.dart';
 import 'package:bmi_buyer/data/response_vo/get_product_response_vo.dart';
-import 'package:bmi_buyer/provider/cart_provider.dart';
 import 'package:bmi_buyer/provider/get_product_provider.dart';
 import 'package:bmi_buyer/reusable_button.dart';
 import 'package:bmi_buyer/reusable_text.dart';
 import 'package:bmi_buyer/reusable_textField.dart';
-import 'package:bmi_buyer/screen/buying_process/buyer_confirm.dart';
 import 'package:bmi_buyer/screen/shopping_cart/shopping_cart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import '../../const/color.dart';
 import '../../data/request_vo/product_order_request_vo.dart';
-import 'buyer_goods_type.dart';
 
 class BuyerDetails extends StatefulWidget {
   const BuyerDetails({
@@ -58,9 +54,9 @@ class _BuyerDetailsState extends State<BuyerDetails> {
                 borderRadius: BorderRadius.circular(40),
                 elevation: 10,
                 child: Image.network(
-                  width: MediaQuery.of(context).size.width*.9,
-
-                    widget.productsDetails.photo?.originalUrl??"https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7898.jpg"),
+                    width: MediaQuery.of(context).size.width * .9,
+                    widget.productsDetails.photo?.originalUrl ??
+                        "https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7898.jpg"),
               ),
             ),
             // Image.asset(
@@ -110,12 +106,12 @@ class _BuyerDetailsState extends State<BuyerDetails> {
               height: 20,
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ReusableText(
+                  const ReusableText(
                       reuseText: "စျေးနှုန်း", fWeight: FontWeight.bold),
                   ReusableText(
                       reuseText: "${widget.productsDetails.price} ကျပ်"),
@@ -126,12 +122,12 @@ class _BuyerDetailsState extends State<BuyerDetails> {
               height: 20,
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ReusableText(
+                  const ReusableText(
                       reuseText: "ဖုန်းနံပါတ်", fWeight: FontWeight.bold),
                   ReusableText(reuseText: widget.phone),
                 ],
@@ -182,33 +178,63 @@ class _BuyerDetailsState extends State<BuyerDetails> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    IgnorePointer(
-                      ignoring: value.orderCount == 1,
-                      child: GestureDetector(
-                        onTap: () {
-                          if (value.orderCount == 1) {
-                            AwesomeDialog(
-                              context: context,
-                              dialogType: DialogType.error,
-                              animType: AnimType.rightSlide,
-                              title: 'သတိပြုရန်',
-                              desc: 'အနည်းဆုံးမှာယူရမည့် ပမာဏရောက်နေပါသည်',
-                              // btnCancelOnPress: () {},
-                              btnOkOnPress: () {},
-                            ).show();
-                          } else {
-                            value.removeFromCart();
-                          }
-                        },
-                        child: Icon(
-                          Icons.remove_circle_outline,
-                          color: value.orderCount == 1
-                              ? black.withOpacity(0.4)
-                              : white,
-                          size: 40,
-                        ),
-                      ),
-                    ),
+                    (value.buyerType == 1)
+                        ? IgnorePointer(
+                            ignoring: value.orderCount == 1,
+                            child: GestureDetector(
+                              onTap: () {
+                                if (value.orderCount == 1) {
+                                  AwesomeDialog(
+                                    context: context,
+                                    dialogType: DialogType.error,
+                                    animType: AnimType.rightSlide,
+                                    title: 'သတိပြုရန်',
+                                    desc:
+                                        'အနည်းဆုံးမှာယူရမည့် ပမာဏရောက်နေပါသည်',
+                                    // btnCancelOnPress: () {},
+                                    btnOkOnPress: () {},
+                                  ).show();
+                                } else {
+                                  value.removeFromCart();
+                                }
+                              },
+                              child: Icon(
+                                Icons.remove_circle_outline,
+                                color: value.orderCount == 1
+                                    ? black.withOpacity(0.4)
+                                    : white,
+                                size: 40,
+                              ),
+                            ),
+                          )
+                        : IgnorePointer(
+                            ignoring: value.orderCount == 50,
+                            child: GestureDetector(
+                              onTap: () {
+                                if (value.orderCount == 50) {
+                                  AwesomeDialog(
+                                    context: context,
+                                    dialogType: DialogType.error,
+                                    animType: AnimType.rightSlide,
+                                    title: 'သတိပြုရန်',
+                                    desc:
+                                        'အနည်းဆုံးမှာယူရမည့် ပမာဏရောက်နေပါသည်',
+                                    // btnCancelOnPress: () {},
+                                    btnOkOnPress: () {},
+                                  ).show();
+                                } else {
+                                  value.removeFromCart();
+                                }
+                              },
+                              child: Icon(
+                                Icons.remove_circle_outline,
+                                color: value.orderCount == 50
+                                    ? black.withOpacity(0.4)
+                                    : white,
+                                size: 40,
+                              ),
+                            ),
+                          ),
                     const SizedBox(
                       width: 10,
                     ),
@@ -234,40 +260,42 @@ class _BuyerDetailsState extends State<BuyerDetails> {
                   ],
                 ),
               ),
-             ReusableButton(
-                  width: MediaQuery.of(context).size.width * .5,
-                  onTap: () async {
-                    value.addOrderList(widget.productsDetails.product?.id??1, DateTime.now(), value.deliveryLocation.text, value.phone);
-                    value.addToCartOrder(
-                        widget.productsDetails.product?.name ?? "",
-                        widget.measurement.name ?? "",
-                        int.parse(widget.productsDetails.price ?? "0")*value.orderCount,
-                        int.parse(widget.productsDetails.price ?? "0"),
-                        value.orderCount,
-                        value.deliveryLocation.text,value.phone);
-                    value.productsRequest.add(Product(
-                      productId: widget.productsDetails.product?.id ?? 1,
-                      measurementId: widget.measurement.id ?? 1,
-                      totalAmount:
-                      int.parse(widget.productsDetails.price ?? "0") * value.orderCount,
-                      qty: value.orderCount,
-                    ));
-                    Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(
-                            builder: (context) => ShoppingCart(
-
-                                  phone: value.phone,
-                                  deliveryAddress: value.deliveryLocation.text,
-                                  productsDetails: widget.productsDetails,
-                                  measurement: widget.measurement,
-                                )),
-                        (Route<dynamic> route) => false);
-                  },
-                  text: "စျေးဝယ်ခြင်းသို့ ထည့်ရန်",
-                  color: yellow,
-                  height: 40,
-                ),
-
+              ReusableButton(
+                width: MediaQuery.of(context).size.width * .5,
+                onTap: () async {
+                  value.addOrderList(widget.productsDetails.product?.id ?? 1,
+                      DateTime.now(), value.deliveryLocation.text, value.phone);
+                  value.addToCartOrder(
+                      widget.productsDetails.product?.name ?? "",
+                      widget.measurement.name ?? "",
+                      int.parse(widget.productsDetails.price ?? "0") *
+                          value.orderCount,
+                      int.parse(widget.productsDetails.price ?? "0"),
+                      value.orderCount,
+                      value.deliveryLocation.text,
+                      value.phone);
+                  value.productsRequest.add(Product(
+                    productId: widget.productsDetails.product?.id ?? 1,
+                    measurementId: widget.measurement.id ?? 1,
+                    totalAmount:
+                        int.parse(widget.productsDetails.price ?? "0") *
+                            value.orderCount,
+                    qty: value.orderCount,
+                  ));
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                          builder: (context) => ShoppingCart(
+                                phone: value.phone,
+                                deliveryAddress: value.deliveryLocation.text,
+                                productsDetails: widget.productsDetails,
+                                measurement: widget.measurement,
+                              )),
+                      (Route<dynamic> route) => false);
+                },
+                text: "စျေးဝယ်ခြင်းသို့ ထည့်ရန်",
+                color: yellow,
+                height: 40,
+              ),
             ],
           ),
         ),

@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 
 import 'const/color.dart';
-import 'const/dimen.dart';
 
 class ReusableText extends StatelessWidget {
   const ReusableText(

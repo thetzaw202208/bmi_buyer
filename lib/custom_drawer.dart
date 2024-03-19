@@ -6,6 +6,7 @@ import 'package:bmi_buyer/screen/login/login.dart';
 import 'package:bmi_buyer/screen/profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'const/color.dart';
 
@@ -76,7 +77,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 title: const ReusableText(reuseText:'ဝယ်ယူမှုမှတ်တမ်း',fWeight: FontWeight.bold,fColor: white),
               ),
               ListTile(
-                onTap: () {
+                onTap: () async{
+                  SharedPreferences sh=await SharedPreferences.getInstance();
+                  sh.setBool("isLogin", false);
                   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
                   const LoginScreen()), (Route<dynamic> route) => false);
                   advancedDrawerController.hideDrawer();
@@ -94,10 +97,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   margin: const EdgeInsets.symmetric(
                     vertical: 16.0,horizontal: 10
                   ),
-                  child: Row(
+                  child: const Row(
                     children: [
-                      const ReusableText(reuseText:'Current App Version',fColor: black,),
-                      const ReusableText(reuseText:'  $version ( $buildNumber )',fColor: black,fSize: 16,fWeight: FontWeight.w600,),
+                      ReusableText(reuseText:'Current App Version',fColor: black,),
+                      ReusableText(reuseText:'  $version ( $buildNumber )',fColor: black,fSize: 16,fWeight: FontWeight.w600,),
 
                     ],
                   ),

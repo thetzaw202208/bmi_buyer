@@ -1,5 +1,4 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:bmi_buyer/data/network/data_agents/register/register_data_agent.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,6 +14,7 @@ class LoginProvider extends ChangeNotifier {
 
   bool loading = false;
   int? buyerID;
+  int? buyerType;
   String? phone, address, name;
 
   enableLoading() {
@@ -29,11 +29,13 @@ class LoginProvider extends ChangeNotifier {
 
   doLogin(String phoneNumber, String password, BuildContext context) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    loginDataAgent.doLogin(phoneNumber, password).then((value) {
+    loginDataAgent.doLogin("09$phoneNumber", password).then((value) {
       if (value.code == 200) {
         buyerID = value.data?.id;
         name = value.data?.name;
+        sharedPreferences.setInt("buyer_type", value.data?.buyerCategory ??1);
         sharedPreferences.setInt("buyer_id", buyerID ?? 1);
+        sharedPreferences.setBool("isLogin", true);
         sharedPreferences.setString("name", name ?? "");
         sharedPreferences.setString("phone", phoneNumber);
         sharedPreferences.setString("address", value.data?.address ?? "");

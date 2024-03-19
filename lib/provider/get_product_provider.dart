@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bmi_buyer/data/network/data_agents/get_product/get_product_data_agent.dart';
 import 'package:bmi_buyer/data/network/data_agents/get_product/get_product_data_agent_impl.dart';
 import 'package:bmi_buyer/data/network/data_agents/product_order/product_order_data_agent.dart';
@@ -20,6 +21,7 @@ class GetProductProvider extends ChangeNotifier {
   ProductOrderDataAgent productOrderDataAgent = ProductOrderDataAgentImpl();
   bool loading = false;
   int? id;
+  int? buyerType;
   String phone = "", address = "";
   int orderCount = 1;
   List<ProductElement>? products = [];
@@ -53,7 +55,11 @@ class GetProductProvider extends ChangeNotifier {
       if (value.code == 200) {
         productsRequest.clear();
         orderList.clear();
-orderCount=1;
+        if(buyerType==1){
+          orderCount=1;
+        }else{
+          orderCount=50;
+        }
         print("product order success ${value.data?[0].productId}");
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => const BuyProcessSuccess()),
@@ -103,10 +109,26 @@ orderCount=1;
   }
 
   ///remove from cart with index
-  void removeFromCartWithIndex(int index, int quantities) {
-    orderList[index].quantity--;
-    orderList[index].totalAmount =
-        orderList[index].originalPrice * orderList[index].quantity;
+  void removeFromCartWithIndex(int index, int quantities,BuildContext context) {
+    if(buyerType==1){
+      orderList[index].quantity--;
+      orderList[index].totalAmount =
+          orderList[index].originalPrice * orderList[index].quantity;
+    }else{
+      if(orderList[index].quantity<=50){
+        AwesomeDialog(
+          dialogType: DialogType.error,
+          context: context,
+          title: "အနည်းဆုံးမှာယူရမည့် ပမာဏသို့ ရောက်ရှိနေပါသည်",
+          btnOkOnPress: () {},
+        ).show();
+      }else{
+        orderList[index].quantity--;
+        orderList[index].totalAmount =
+            orderList[index].originalPrice * orderList[index].quantity;
+      }
+    }
+
 
     notifyListeners();
   }
@@ -120,8 +142,14 @@ orderCount=1;
   getProduct() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     id = sharedPreferences.getInt("buyer_id") ?? 1;
+    buyerType = sharedPreferences.getInt("buyer_type") ?? 1;
     phone = sharedPreferences.getString("phone") ?? "";
     deliveryLocation.text = sharedPreferences.getString("address") ?? "";
+    if(buyerType==1){
+      orderCount=1;
+    }else{
+      orderCount=50;
+    }
     getProductList(id ?? 1);
   }
 

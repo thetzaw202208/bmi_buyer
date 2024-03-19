@@ -1,9 +1,6 @@
-import 'package:bmi_buyer/provider/cart_provider.dart';
 import 'package:bmi_buyer/provider/get_product_provider.dart';
 import 'package:bmi_buyer/screen/buying_process/buyer_confirm.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 import '../../const/color.dart';
@@ -53,7 +50,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                 (Route<dynamic> route) => false);
                           }
                         } else {
-                          value.removeFromCartWithIndex(index,value.orderList[index].quantity);
+                          value.removeFromCartWithIndex(index,value.orderList[index].quantity,context);
                           if (value.orderList[index].quantity == 0) {
                             Navigator.pop(context);
                           }
@@ -177,7 +174,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           horizontal: 15.0, vertical: 10),
                       child: ReusableButton(
                         onTap: () {
-value.orderCount=1;
+                          if(value.buyerType==1){
+                            value.orderCount=1;
+                          }else{
+                            value.orderCount=50;
+                          }
+
                           Navigator.of(context).pushAndRemoveUntil(
                               MaterialPageRoute(
                                   builder: (context) => const BuyerGoodsType()),

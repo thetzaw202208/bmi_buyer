@@ -1,5 +1,4 @@
 import 'package:bmi_buyer/reusable_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -66,23 +65,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       ),
       body:  Padding(
-        padding: EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 20,),
-            Center(
+            const SizedBox(height: 20,),
+            const Center(
               child: CircleAvatar(
                 radius: 60,
                 child: Icon(Icons.person,size: 100,),
               ),
             ),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ReusableText(reuseText: "အမည်",fWeight: FontWeight.bold,fSize: 16,),
+                const ReusableText(reuseText: "အမည်",fWeight: FontWeight.bold,fSize: 16,),
                 ReusableTextField(
                   isEnabled: false,
                   textEditingController: name,
@@ -94,11 +93,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
             Column(crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ReusableText(reuseText: "ဖုန်းနံပါတ်",fWeight: FontWeight.bold,fSize: 16,),
+                const ReusableText(reuseText: "ဖုန်းနံပါတ်",fWeight: FontWeight.bold,fSize: 16,),
                 ReusableTextField(isEnabled: false,
                   textEditingController: phone,
                   keyboardType: TextInputType.number,
@@ -108,11 +107,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
             Column(crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ReusableText(reuseText: "လိပ်စာ",fWeight: FontWeight.bold,fSize: 16,),
+                const ReusableText(reuseText: "လိပ်စာ",fWeight: FontWeight.bold,fSize: 16,),
                 ReusableTextField(isEnabled: false,
                   textEditingController: address,
                   keyboardType: TextInputType.number,
@@ -122,11 +121,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
             Column(crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ReusableText(reuseText: "ဝယ်ယူသူ အမျိုးအစား",fWeight: FontWeight.bold,fSize: 16,),
+                const ReusableText(reuseText: "ဝယ်ယူသူ အမျိုးအစား",fWeight: FontWeight.bold,fSize: 16,),
                 ReusableTextField(isEnabled: false,
                   textEditingController: buyer,
                   keyboardType: TextInputType.number,
@@ -136,7 +135,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
 
 
           ],

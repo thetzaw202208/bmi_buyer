@@ -45,6 +45,10 @@ class RegisterScreen extends StatelessWidget {
                   height: 20,
                 ),
                 ReusableTextField(
+                  prefixText: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: ReusableText(reuseText: "09",fSize: 16,fWeight: FontWeight.w400,),
+                  ),
                   hintText: "ဖုန်းနံပါတ်ထည့်ပါ",
                   keyboardType: TextInputType.phone,
                   textEditingController: registerProvider.phoneController,

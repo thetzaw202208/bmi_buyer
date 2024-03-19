@@ -9,9 +9,10 @@ import 'package:retrofit/http.dart';
 import '../../const/api.dart';
 import '../request_vo/product_order_request_vo.dart';
 part 'api_service.g.dart';
+
 @RestApi()
 abstract class ApiService {
-  factory ApiService(Dio dio,{String baseUrl}) = _ApiService;
+  factory ApiService(Dio dio, {String baseUrl}) = _ApiService;
 
   ///Register
 
@@ -26,47 +27,33 @@ abstract class ApiService {
     @Field("shop_address") String shopAddress,
   );
 
-
   ///Login
 
   @POST(loginEndpoint)
   Future<LoginResponseVo> login(
-
-      @Field("phone_no") String phoneNumber,
-      @Field("password") String password,
-
-      );
+    @Field("phone_no") String phoneNumber,
+    @Field("password") String password,
+  );
 
   ///get Product
 
   @POST(getProductEndpoint)
   Future<GetProductResponseVo> getProduct(
-
-      @Field("buyer_id") int buyerID,
-
-
-      );
-
+    @Field("buyer_id") int buyerID,
+  );
 
   /// Product order
 
   @POST(orderEndpoint)
   Future<ProductOrderResponseVo> productOrder(
-
-      @Field("orders") Orders orders,
-      @Field("products") List<Product> products,
-
-
-      );
-
+    @Field("orders") Orders orders,
+    @Field("products") List<Product> products,
+  );
 
   ///get Product order List
 
   @POST(getOrderHistoryEndpoint)
   Future<OrderListResponseVo> getProductOrderList(
-
-      @Field("buyer_id") int buyerID,
-
-
-      );
+    @Field("buyer_id") int buyerID,
+  );
 }

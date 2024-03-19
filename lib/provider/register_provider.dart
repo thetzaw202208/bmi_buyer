@@ -36,7 +36,7 @@ class RegisterProvider extends ChangeNotifier {
       String shopAddress,
       BuildContext context) {
     registerDataAgent
-        .doRegister(name, phoneNumber, password, address, buyerCategory,
+        .doRegister(name, "09$phoneNumber", password, address, buyerCategory,
             shopName, shopAddress)
         .then((value) {
       print(

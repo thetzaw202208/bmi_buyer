@@ -45,25 +45,28 @@ class RegisterScreen extends StatelessWidget {
                   height: 20,
                 ),
                 ReusableTextField(
-
-                  hintText: "ဖုန်းနံပါတ်ထည့်ပါ",
-                  keyboardType: TextInputType.phone,
-                  textEditingController: registerProvider.phoneController,
-                  borderColor: kLoginBorderColor,
-                  borderRadius: kLargeBorderRadius,
-                  prefixIcon:
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-SizedBox(width: 10,),
-                      const Opacity(opacity: 0.5, child: Icon(Icons.phone)),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
-                        child: ReusableText(reuseText: "09",fSize: 16,fWeight: FontWeight.w600,),
-                      )
-                    ],
-                  )
-                ),
+                    hintText: "ဖုန်းနံပါတ်ထည့်ပါ",
+                    keyboardType: TextInputType.phone,
+                    textEditingController: registerProvider.phoneController,
+                    borderColor: kLoginBorderColor,
+                    borderRadius: kLargeBorderRadius,
+                    prefixIcon: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SizedBox(
+                          width: 10,
+                        ),
+                        const Opacity(opacity: 0.5, child: Icon(Icons.phone)),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8.0),
+                          child: ReusableText(
+                            reuseText: "09",
+                            fSize: 16,
+                            fWeight: FontWeight.w600,
+                          ),
+                        )
+                      ],
+                    )),
                 const SizedBox(
                   height: 20,
                 ),
@@ -137,18 +140,15 @@ SizedBox(width: 10,),
                         registerProvider.phoneController.text.isNotEmpty &&
                         registerProvider.passwordController.text.isNotEmpty &&
                         registerProvider.addressController.text.isNotEmpty) {
-                      if(registerProvider.passwordController.text.length<6){
+                      if (registerProvider.passwordController.text.length < 6) {
                         AwesomeDialog(
                           dialogType: DialogType.warning,
                           context: context,
                           btnOkText: "အိုကေ",
                           desc: "လျှို့ဝှက်နံပါတ် အနည်းဆုံး ၆ လုံးရှိရပါမည်",
-                          btnOkOnPress: () {
-
-                          },
-                        )
-                            .show();
-                      }else{
+                          btnOkOnPress: () {},
+                        ).show();
+                      } else {
                         registerProvider.enableLoading();
                         registerProvider.doRegister(
                             registerProvider.nameController.text,
@@ -163,20 +163,15 @@ SizedBox(width: 10,),
                           print("Here is buyer type $buyerType");
                         }
                       }
-
-                    }else{
+                    } else {
                       AwesomeDialog(
-                          dialogType: DialogType.warning,
-                          context: context,
+                        dialogType: DialogType.warning,
+                        context: context,
                         btnOkText: "အိုကေ",
-                           desc: "အချက်အလက်များ ပြည့်စုံစွာဖြည့်သွင်းပါ",
-                          btnOkOnPress: () {
-
-                          },
-                          )
-                          .show();
+                        desc: "အချက်အလက်များ ပြည့်စုံစွာဖြည့်သွင်းပါ",
+                        btnOkOnPress: () {},
+                      ).show();
                     }
-
                   },
                   width: MediaQuery.of(context).size.width,
                   text: "",

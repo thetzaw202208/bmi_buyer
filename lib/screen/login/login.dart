@@ -34,21 +34,26 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(
                   height: 30,
                 ),
-                 ReusableTextField(
-
+                ReusableTextField(
                   hintText: "ဖုန်းနံပါတ်ထည့်ပါ",
                   keyboardType: TextInputType.phone,
-                  textEditingController:loginProvider.phoneController,
+                  textEditingController: loginProvider.phoneController,
                   borderColor: kLoginBorderColor,
                   borderRadius: kLargeBorderRadius,
                   prefixIcon: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-SizedBox(width: 10,),
+                      SizedBox(
+                        width: 10,
+                      ),
                       const Opacity(opacity: 0.5, child: Icon(Icons.phone)),
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8.0),
-                        child: ReusableText(reuseText: "09",fSize: 16,fWeight: FontWeight.w600,),
+                        child: ReusableText(
+                          reuseText: "09",
+                          fSize: 16,
+                          fWeight: FontWeight.w600,
+                        ),
                       )
                     ],
                   ),
@@ -56,14 +61,14 @@ SizedBox(width: 10,),
                 const SizedBox(
                   height: 30,
                 ),
-                 ReusableTextField(
-
+                ReusableTextField(
                   hintText: "လျှို့ဝှက်နံပါတ်ထည့်ပါ",
                   obs: true,
-                  textEditingController:loginProvider.passwordController,
+                  textEditingController: loginProvider.passwordController,
                   borderColor: kLoginBorderColor,
                   borderRadius: kLargeBorderRadius,
-                  prefixIcon: const Opacity(opacity: 0.5, child: Icon(Icons.lock)),
+                  prefixIcon:
+                      const Opacity(opacity: 0.5, child: Icon(Icons.lock)),
                 ),
                 const SizedBox(
                   height: 5,
@@ -79,39 +84,36 @@ SizedBox(width: 10,),
                 ),
                 ReusableButton(
                   onTap: () async {
-                    if(loginProvider.phoneController.text.isNotEmpty&&loginProvider.passwordController.text.isNotEmpty) {
+                    if (loginProvider.phoneController.text.isNotEmpty &&
+                        loginProvider.passwordController.text.isNotEmpty) {
                       loginProvider.enableLoading();
                       loginProvider.doLogin(loginProvider.phoneController.text,
                           loginProvider.passwordController.text, context);
-                    }else{
+                    } else {
                       AwesomeDialog(
                         dialogType: DialogType.warning,
                         context: context,
                         btnOkText: "အိုကေ",
                         desc: "အချက်အလက်များ ပြည့်စုံစွာဖြည့်သွင်းပါ",
-                        btnOkOnPress: () {
-
-                        },
-                      )
-                          .show();
+                        btnOkOnPress: () {},
+                      ).show();
                     }
-
                   },
                   width: MediaQuery.of(context).size.width,
                   text: "",
-                 widget: loginProvider.loading
+                  widget: loginProvider.loading
                       ? const Center(
-                    child: SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(
-                          color: white,
-                        )),
-                  )
+                          child: SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(
+                                color: white,
+                              )),
+                        )
                       : const ReusableText(
-                    reuseText: "အကောင့်ဝင်မည်",
-                    fColor: white,
-                  ),
+                          reuseText: "အကောင့်ဝင်မည်",
+                          fColor: white,
+                        ),
                   color: green,
                   textColor: white,
                 ),

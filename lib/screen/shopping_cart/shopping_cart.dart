@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bmi_buyer/provider/get_product_provider.dart';
 import 'package:bmi_buyer/screen/buying_process/buyer_confirm.dart';
 import 'package:flutter/material.dart';
@@ -7,13 +8,15 @@ import '../../const/color.dart';
 import '../../data/response_vo/get_product_response_vo.dart';
 import '../../reusable_button.dart';
 import '../../reusable_text.dart';
+import '../../reusable_textField.dart';
 import '../buying_process/buyer_goods_type.dart';
 
 class ShoppingCart extends StatefulWidget {
-  const ShoppingCart({super.key,  this.phone,  this.deliveryAddress,  this.productsDetails,  this.measurement});
+  const ShoppingCart({super.key,  this.phone,  this.deliveryAddress,   this.measurement,  this.buyerID, this.hasDelivery});
 final String? phone,deliveryAddress;
-  final ProductElement? productsDetails;
+  //final ProductElement? productsDetails;
   final Measurement? measurement;
+  final int? buyerID,hasDelivery;
 
   @override
   State<ShoppingCart> createState() => _ShoppingCartState();
@@ -26,61 +29,125 @@ class _ShoppingCartState extends State<ShoppingCart> {
       context: context,
       builder: (BuildContext context) {
         return Consumer<GetProductProvider>(
-          builder: (context, value, child) => Container(
-            height: 100,
-            padding: const EdgeInsets.all(26.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
+          builder: (context, value, child) => LayoutBuilder(
+
+            builder: (context,constraints)
+            {
+              final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
+              value.quantityController.text=value.orderList[index].quantity.toString();
+             return Container(
+                height: 100+keyboardHeight,
+                padding:  EdgeInsets.only(left: 26.0,right: 26,bottom: keyboardHeight),
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
-                    GestureDetector(
-                      child: const Icon(Icons.remove),
-                      onTap: () {
-                        if (value.orderList[index].quantity == 1) {
+                  children: [
+                    (widget.buyerID==1)? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        GestureDetector(
+                          child: const Icon(Icons.remove),
+                          onTap: () {
+                            if (value.orderList[index].quantity == 1) {
+                              value.removeOrder(index);
+                              Navigator.pop(context);
+                              if (value.orderList.isEmpty) {
+                                Navigator.of(context).pushAndRemoveUntil(
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                        const BuyerGoodsType()),
+                                        (Route<dynamic> route) => false);
+                              }
+                            } else {
+                              value.removeFromCartWithIndex(index,value.orderList[index].quantity,context);
+                              if (value.orderList[index].quantity == 0) {
+                                Navigator.pop(context);
+                              }
+                            }
+
+                            // Add your functionality here
+                          },
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        ReusableText(
+                            reuseText:
+                            value.orderList[index].quantity.toString()),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        GestureDetector(
+                          child: const Icon(Icons.add),
+                          onTap: () {
+                            value.addToCartWithIndex(index,value.orderList[index].quantity);
+                            // Add your functionality here
+                          },
+                        ),
+                      ],
+                    ):
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * .3,
+                      child: ReusableTextField(
+                        //autoFocus: true,
+                        keyboardType: TextInputType.number,
+                        //hintText: "50",
+                        textEditingController: value.quantityController,
+
+                        onChanged: (textValue) {
+                          //value.quantityController.text = textValue;
+                          value.editQuantityWholeSale(index, int.parse(textValue));
+                        },
+                        onSubmitted: (string) {
+                          if (int.parse(string) < 50) {
+                            AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.error,
+                              animType: AnimType.rightSlide,
+                              title: 'သတိပြုရန်',
+                              desc: 'အနည်းဆုံးမှာယူရမည့် ပမာဏမှာ ၅၀ ဖြစ်ပါသည်',
+                              // btnCancelOnPress: () {},
+                              btnOkOnPress: () {},
+                            ).show();
+                          } else {
+                           // value.quantityController.text = string;
+                            value.editQuantityWholeSale(index, int.parse(string));
+                          }
+                        },
+                      ),
+                    ),
+
+                    ReusableText(
+                        reuseText: "${value.orderList[index].totalAmount.toString()} ကျပ်"),
+                    IconButton(onPressed: (){
+                      AwesomeDialog(
+                        context: context,
+                        dialogType: DialogType.error,
+                        animType: AnimType.rightSlide,
+                        title: 'သတိပြုရန်',
+                        desc: 'ပယ်ဖျက်ရန် သေချာပါသလား',
+                        btnOkText: "သေချာပါသည်",
+                       btnCancelText:  "မလုပ်ပါ",
+                         btnCancelOnPress: () {},
+                        btnOkOnPress: () {
                           value.removeOrder(index);
                           Navigator.pop(context);
                           if (value.orderList.isEmpty) {
                             Navigator.of(context).pushAndRemoveUntil(
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        const BuyerGoodsType()),
-                                (Route<dynamic> route) => false);
+                                    const BuyerGoodsType()),
+                                    (Route<dynamic> route) => false);
                           }
-                        } else {
-                          value.removeFromCartWithIndex(index,value.orderList[index].quantity,context);
-                          if (value.orderList[index].quantity == 0) {
-                            Navigator.pop(context);
-                          }
-                        }
+                        },
+                      ).show();
 
-                        // Add your functionality here
-                      },
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    ReusableText(
-                        reuseText:
-                            value.orderList[index].quantity.toString()),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    GestureDetector(
-                      child: const Icon(Icons.add),
-                      onTap: () {
-                        value.addToCartWithIndex(index,value.orderList[index].quantity);
-                        // Add your functionality here
-                      },
-                    ),
+
+                    }, icon: Icon(Icons.delete_forever,color: Colors.redAccent,size: 30,))
                   ],
                 ),
-                ReusableText(
-                    reuseText: value.orderList[index].totalAmount.toString())
-              ],
-            ),
+              );}
+
           ),
         );
       },
@@ -116,6 +183,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     child: ListView.builder(
                       itemCount: value.orderList.length,
                       itemBuilder: (context, index) {
+
                         currentIndex=index;
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -204,7 +272,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             Navigator.of(context).pushAndRemoveUntil(
                                 MaterialPageRoute(
                                     builder: (context) => BuyerConfirmScreen(
-                                      productsDetails: widget.productsDetails,
+                                      hasDeli:widget.hasDelivery,
                                         measurement: widget.measurement,
                                         riceType: value.orderList[currentIndex??0].name,
                                         quantity: value.orderList[currentIndex??0].quantity.toString(),

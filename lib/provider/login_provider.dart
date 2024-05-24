@@ -1,6 +1,8 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:bmi_buyer/provider/get_product_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../data/network/data_agents/login/login_data_agent.dart';
@@ -37,9 +39,11 @@ class LoginProvider extends ChangeNotifier {
         sharedPreferences.setInt("buyer_id", buyerID ?? 1);
         sharedPreferences.setBool("isLogin", true);
         sharedPreferences.setString("name", name ?? "");
-        sharedPreferences.setString("phone", phoneNumber);
+        sharedPreferences.setString("phone", "09$phoneNumber");
         sharedPreferences.setString("address", value.data?.address ?? "");
         print("Login Data $name $phoneNumber ${value.data?.address}");
+        Provider.of<GetProductProvider>(context, listen: false).onLoading();
+        
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => const BuyerGoodsType()),
             (Route<dynamic> route) => false);
@@ -49,7 +53,7 @@ class LoginProvider extends ChangeNotifier {
         AwesomeDialog(
           dialogType: DialogType.error,
           context: context,
-          title: value.message,
+          desc: value.message,
           btnOkOnPress: () {},
         ).show();
       }

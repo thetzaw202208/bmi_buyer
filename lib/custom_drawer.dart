@@ -1,11 +1,13 @@
 
 import 'package:bmi_buyer/const/string.dart';
+import 'package:bmi_buyer/provider/get_product_provider.dart';
 import 'package:bmi_buyer/reusable_text.dart';
 import 'package:bmi_buyer/screen/history/history.dart';
 import 'package:bmi_buyer/screen/login/login.dart';
 import 'package:bmi_buyer/screen/profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'const/color.dart';
@@ -79,7 +81,11 @@ class _CustomDrawerState extends State<CustomDrawer> {
               ListTile(
                 onTap: () async{
                   SharedPreferences sh=await SharedPreferences.getInstance();
+
+                  sh.remove("buyer_id");
+                  sh.remove("buyer_type");
                   sh.setBool("isLogin", false);
+                  Provider.of<GetProductProvider>(context, listen: false).resetProvider();
                   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
                   const LoginScreen()), (Route<dynamic> route) => false);
                   advancedDrawerController.hideDrawer();

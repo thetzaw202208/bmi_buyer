@@ -60,7 +60,7 @@ class RegisterProvider extends ChangeNotifier {
         AwesomeDialog(
           dialogType: DialogType.error,
           context: context,
-          title: value.message,
+          desc: value.message,
           btnOkOnPress: () {},
         ).show();
       }

@@ -139,10 +139,13 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                   const SizedBox(
                                     width: 70,
                                   ),
-                                  ReusableText(
-                                      align: TextAlign.start,
-                                      reuseText: value
-                                          .orderList?[index].deliveryAddress),
+                                  SizedBox(
+                                    width: 150,
+                                    child: ReusableText(
+                                        align: TextAlign.start,
+                                        reuseText: value
+                                            .orderList?[index].deliveryAddress),
+                                  ),
                                   const SizedBox(
                                     width: 80,
                                   ),
@@ -159,6 +162,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                                 address: value.orderList![index]
                                                         .deliveryAddress ??
                                                     "",
+                                                deliveryType:value.orderList![index].deliveryType,
                                                 phone: value.orderList![index]
                                                         .phoneNo ??
                                                     "",

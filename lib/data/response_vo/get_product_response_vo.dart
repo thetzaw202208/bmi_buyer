@@ -11,7 +11,7 @@ String getProductResponseVoToJson(GetProductResponseVo data) => json.encode(data
 class GetProductResponseVo {
   int? code;
   String? message;
-  GetProductData? data;
+  ProductRespondData? data;
 
   GetProductResponseVo({
     this.code,
@@ -22,7 +22,7 @@ class GetProductResponseVo {
   factory GetProductResponseVo.fromJson(Map<String, dynamic> json) => GetProductResponseVo(
     code: json["code"],
     message: json["message"],
-    data: json["data"] == null ? null : GetProductData.fromJson(json["data"]),
+    data: json["data"] == null ? null : ProductRespondData.fromJson(json["data"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -32,22 +32,54 @@ class GetProductResponseVo {
   };
 }
 
-class GetProductData {
-  List<ProductElement>? products;
-  List<Measurement>? measurements;
+class ProductRespondData {
+  List<ProductDetailsData>? products;
 
-  GetProductData({
+  ProductRespondData({
     this.products,
-    this.measurements,
   });
 
-  factory GetProductData.fromJson(Map<String, dynamic> json) => GetProductData(
-    products: json["products"] == null ? [] : List<ProductElement>.from(json["products"]!.map((x) => ProductElement.fromJson(x))),
-    measurements: json["measurements"] == null ? [] : List<Measurement>.from(json["measurements"]!.map((x) => Measurement.fromJson(x))),
+  factory ProductRespondData.fromJson(Map<String, dynamic> json) => ProductRespondData(
+    products: json["products"] == null ? [] : List<ProductDetailsData>.from(json["products"]!.map((x) => ProductDetailsData.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
     "products": products == null ? [] : List<dynamic>.from(products!.map((x) => x.toJson())),
+  };
+}
+
+class ProductDetailsData {
+  String? productName;
+  int? productId;
+  int? productCategoryId;
+  int? hasDeliveryType;
+  Photo? photo;
+  List<Measurement>? measurements;
+
+  ProductDetailsData({
+    this.productName,
+    this.productId,
+    this.productCategoryId,
+    this.hasDeliveryType,
+    this.photo,
+    this.measurements,
+  });
+
+  factory ProductDetailsData.fromJson(Map<String, dynamic> json) => ProductDetailsData(
+    productName: json["product_name"],
+    productId: json["product_id"],
+    productCategoryId: json["product_category_id"],
+    hasDeliveryType: json["has_delivery_type"],
+    photo: json["photo"] == null ? null : Photo.fromJson(json["photo"]),
+    measurements: json["measurements"] == null ? [] : List<Measurement>.from(json["measurements"]!.map((x) => Measurement.fromJson(x))),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "product_name": productName,
+    "product_id": productId,
+    "product_category_id": productCategoryId,
+    "has_delivery_type": hasDeliveryType,
+    "photo": photo?.toJson(),
     "measurements": measurements == null ? [] : List<dynamic>.from(measurements!.map((x) => x.toJson())),
   };
 }
@@ -55,108 +87,28 @@ class GetProductData {
 class Measurement {
   int? id;
   String? name;
-  int? type;
-  int? productCategoryId;
-  dynamic createdAt;
-  dynamic updatedAt;
+  int? measurementId;
+  String? price;
 
   Measurement({
     this.id,
     this.name,
-    this.type,
-    this.productCategoryId,
-    this.createdAt,
-    this.updatedAt,
+    this.measurementId,
+    this.price,
   });
 
   factory Measurement.fromJson(Map<String, dynamic> json) => Measurement(
     id: json["id"],
     name: json["name"],
-    type: json["type"],
-    productCategoryId: json["product_category_id"],
-    createdAt: json["created_at"],
-    updatedAt: json["updated_at"],
+    measurementId: json["measurement_id"],
+    price: json["price"],
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
     "name": name,
-    "type": type,
-    "product_category_id": productCategoryId,
-    "created_at": createdAt,
-    "updated_at": updatedAt,
-  };
-}
-
-class ProductElement {
-  int? id;
-  int? productId;
-  int? measurementId;
-  int? productCategoryId;
-  String? price;
-  String? weight;
-  dynamic image;
-  dynamic createdAt;
-  dynamic updatedAt;
-  dynamic deletedAt;
-  Photo? photo;
-  Measurement? measurement;
-  ProductsDetails? product;
-  ProductCategory? productCategory;
-  List<Photo>? media;
-
-  ProductElement({
-    this.id,
-    this.productId,
-    this.measurementId,
-    this.productCategoryId,
-    this.price,
-    this.weight,
-    this.image,
-    this.createdAt,
-    this.updatedAt,
-    this.deletedAt,
-    this.photo,
-    this.measurement,
-    this.product,
-    this.productCategory,
-    this.media,
-  });
-
-  factory ProductElement.fromJson(Map<String, dynamic> json) => ProductElement(
-    id: json["id"],
-    productId: json["product_id"],
-    measurementId: json["measurement_id"],
-    productCategoryId: json["product_category_id"],
-    price: json["price"],
-    weight: json["weight"],
-    image: json["image"],
-    createdAt: json["created_at"],
-    updatedAt: json["updated_at"],
-    deletedAt: json["deleted_at"],
-    photo: json["photo"] == null ? null : Photo.fromJson(json["photo"]),
-    measurement: json["measurement"] == null ? null : Measurement.fromJson(json["measurement"]),
-    product: json["product"] == null ? null : ProductsDetails.fromJson(json["product"]),
-    productCategory: json["product_category"] == null ? null : ProductCategory.fromJson(json["product_category"]),
-    media: json["media"] == null ? [] : List<Photo>.from(json["media"]!.map((x) => Photo.fromJson(x))),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "product_id": productId,
     "measurement_id": measurementId,
-    "product_category_id": productCategoryId,
     "price": price,
-    "weight": weight,
-    "image": image,
-    "created_at": createdAt,
-    "updated_at": updatedAt,
-    "deleted_at": deletedAt,
-    "photo": photo?.toJson(),
-    "measurement": measurement?.toJson(),
-    "product": product?.toJson(),
-    "product_category": productCategory?.toJson(),
-    "media": media == null ? [] : List<dynamic>.from(media!.map((x) => x.toJson())),
   };
 }
 
@@ -263,6 +215,7 @@ class Photo {
     "preview_url": previewUrl,
   };
 }
+
 class GeneratedConversions {
   bool? thumb;
   bool? preview;
@@ -280,76 +233,5 @@ class GeneratedConversions {
   Map<String, dynamic> toJson() => {
     "thumb": thumb,
     "preview": preview,
-  };
-}
-class ProductsDetails {
-  int? id;
-  String? name;
-  dynamic createdAt;
-  dynamic updatedAt;
-  dynamic deletedAt;
-  dynamic photo;
-  List<dynamic>? media;
-
-  ProductsDetails({
-    this.id,
-    this.name,
-    this.createdAt,
-    this.updatedAt,
-    this.deletedAt,
-    this.photo,
-    this.media,
-  });
-
-  factory ProductsDetails.fromJson(Map<String, dynamic> json) => ProductsDetails(
-    id: json["id"],
-    name: json["name"],
-    createdAt: json["created_at"],
-    updatedAt: json["updated_at"],
-    deletedAt: json["deleted_at"],
-    photo: json["photo"],
-    media: json["media"] == null ? [] : List<dynamic>.from(json["media"]!.map((x) => x)),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "created_at": createdAt,
-    "updated_at": updatedAt,
-    "deleted_at": deletedAt,
-    "photo": photo,
-    "media": media == null ? [] : List<dynamic>.from(media!.map((x) => x)),
-  };
-}
-
-class ProductCategory {
-  int? id;
-  String? name;
-  dynamic createdAt;
-  dynamic updatedAt;
-  dynamic deletedAt;
-
-  ProductCategory({
-    this.id,
-    this.name,
-    this.createdAt,
-    this.updatedAt,
-    this.deletedAt,
-  });
-
-  factory ProductCategory.fromJson(Map<String, dynamic> json) => ProductCategory(
-    id: json["id"],
-    name: json["name"],
-    createdAt: json["created_at"],
-    updatedAt: json["updated_at"],
-    deletedAt: json["deleted_at"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "created_at": createdAt,
-    "updated_at": updatedAt,
-    "deleted_at": deletedAt,
   };
 }

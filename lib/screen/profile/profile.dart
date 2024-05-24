@@ -30,7 +30,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     name.text = sharedPreferences.getString("name") ?? "";
     phone.text = sharedPreferences.getString("phone") ?? "";
     address.text = sharedPreferences.getString("address") ?? "";
-    var buyerType = sharedPreferences.getInt("buyer_id");
+    var buyerType = sharedPreferences.getInt("buyer_type");
     if(buyerType==1){
       buyer.text="လက်လီ";
     }

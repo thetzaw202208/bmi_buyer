@@ -4,6 +4,7 @@ import 'package:bmi_buyer/provider/login_provider.dart';
 import 'package:bmi_buyer/reusable_button.dart';
 import 'package:bmi_buyer/reusable_text.dart';
 import 'package:bmi_buyer/reusable_textField.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -82,40 +83,46 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(
                   height: 30,
                 ),
-                ReusableButton(
-                  onTap: () async {
-                    if (loginProvider.phoneController.text.isNotEmpty &&
-                        loginProvider.passwordController.text.isNotEmpty) {
-                      loginProvider.enableLoading();
-                      loginProvider.doLogin(loginProvider.phoneController.text,
-                          loginProvider.passwordController.text, context);
-                    } else {
-                      AwesomeDialog(
-                        dialogType: DialogType.warning,
-                        context: context,
-                        btnOkText: "အိုကေ",
-                        desc: "အချက်အလက်များ ပြည့်စုံစွာဖြည့်သွင်းပါ",
-                        btnOkOnPress: () {},
-                      ).show();
-                    }
-                  },
-                  width: MediaQuery.of(context).size.width,
-                  text: "",
-                  widget: loginProvider.loading
-                      ? const Center(
-                          child: SizedBox(
-                              width: 20,
-                              height: 20,
-                              child: CircularProgressIndicator(
-                                color: white,
-                              )),
-                        )
-                      : const ReusableText(
-                          reuseText: "အကောင့်ဝင်မည်",
-                          fColor: white,
-                        ),
-                  color: green,
-                  textColor: white,
+                IgnorePointer(
+                  ignoring: loginProvider.loading,
+                  child: ReusableButton(
+                    onTap: () async {
+                      if (loginProvider.phoneController.text.isNotEmpty &&
+                          loginProvider.passwordController.text.isNotEmpty) {
+                        loginProvider.enableLoading();
+                        Future.delayed(const Duration(seconds: 2),(){
+                          loginProvider.doLogin(loginProvider.phoneController.text,
+                              loginProvider.passwordController.text, context);
+                        });
+
+                      } else {
+                        AwesomeDialog(
+                          dialogType: DialogType.warning,
+                          context: context,
+                          btnOkText: "အိုကေ",
+                          desc: "အချက်အလက်များ ပြည့်စုံစွာဖြည့်သွင်းပါ",
+                          btnOkOnPress: () {},
+                        ).show();
+                      }
+                    },
+                    width: MediaQuery.of(context).size.width,
+                    text: "",
+                    widget: loginProvider.loading
+                        ? const Center(
+                            child: SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator(
+                                  color: white,
+                                )),
+                          )
+                        : const ReusableText(
+                            reuseText: "အကောင့်ဝင်မည်",
+                            fColor: white,
+                          ),
+                    color:loginProvider.loading?green.withOpacity(0.5): green,
+                    textColor: white,
+                  ),
                 ),
                 const SizedBox(
                   height: 30,

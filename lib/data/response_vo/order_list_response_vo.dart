@@ -35,6 +35,7 @@ class OrderListResponseVo {
 class OrderListData {
   DateTime? orderDate;
   String? deliveryAddress;
+  String? deliveryType;
   String? phoneNo;
   String? status;
   int? statusId;
@@ -43,6 +44,7 @@ class OrderListData {
   OrderListData({
     this.orderDate,
     this.deliveryAddress,
+    this.deliveryType,
     this.phoneNo,
     this.status,
     this.statusId,
@@ -52,6 +54,7 @@ class OrderListData {
   factory OrderListData.fromJson(Map<String, dynamic> json) => OrderListData(
     orderDate: json["order_date"] == null ? null : DateTime.parse(json["order_date"]),
     deliveryAddress: json["delivery_address"],
+    deliveryType: json["delivery_type"],
     phoneNo: json["phone_no"],
     status: json["status"],
     statusId: json["status_id"],
@@ -61,6 +64,7 @@ class OrderListData {
   Map<String, dynamic> toJson() => {
     "order_date": orderDate?.toIso8601String(),
     "delivery_address": deliveryAddress,
+    "delivery_type": deliveryType,
     "phone_no": phoneNo,
     "status": status,
     "status_id": statusId,

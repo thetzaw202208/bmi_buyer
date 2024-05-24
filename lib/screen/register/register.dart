@@ -121,62 +121,67 @@ class RegisterScreen extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                ReusableButton(
-                  widget: registerProvider.loading
-                      ? const Center(
-                          child: SizedBox(
-                              width: 20,
-                              height: 20,
-                              child: CircularProgressIndicator(
-                                color: white,
-                              )),
-                        )
-                      : const ReusableText(
-                          reuseText: "အကောင့်လုပ်မည်",
-                          fColor: white,
-                        ),
-                  onTap: () async {
-                    if (registerProvider.nameController.text.isNotEmpty &&
-                        registerProvider.phoneController.text.isNotEmpty &&
-                        registerProvider.passwordController.text.isNotEmpty &&
-                        registerProvider.addressController.text.isNotEmpty) {
-                      if (registerProvider.passwordController.text.length < 6) {
+                IgnorePointer(
+                  ignoring: registerProvider.loading,
+                  child: ReusableButton(
+                    widget: registerProvider.loading
+                        ? const Center(
+                            child: SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator(
+                                  color: white,
+                                )),
+                          )
+                        : const ReusableText(
+                            reuseText: "အကောင့်လုပ်မည်",
+                            fColor: white,
+                          ),
+                    onTap: () async {
+                      if (registerProvider.nameController.text.isNotEmpty &&
+                          registerProvider.phoneController.text.isNotEmpty &&
+                          registerProvider.passwordController.text.isNotEmpty &&
+                          registerProvider.addressController.text.isNotEmpty) {
+                        if (registerProvider.passwordController.text.length < 6) {
+                          AwesomeDialog(
+                            dialogType: DialogType.warning,
+                            context: context,
+                            btnOkText: "အိုကေ",
+                            desc: "လျှို့ဝှက်နံပါတ် အနည်းဆုံး ၆ လုံးရှိရပါမည်",
+                            btnOkOnPress: () {},
+                          ).show();
+                        } else {
+                          registerProvider.enableLoading();
+                         Future.delayed(const Duration(seconds: 2),(){
+                           registerProvider.doRegister(
+                               registerProvider.nameController.text,
+                               registerProvider.phoneController.text,
+                               registerProvider.passwordController.text,
+                               registerProvider.addressController.text,
+                               buyerType,
+                               registerProvider.shopNameController.text,
+                               registerProvider.shopAddressController.text,
+                               context);
+                         });
+                          if (kDebugMode) {
+                            print("Here is buyer type $buyerType");
+                          }
+                        }
+                      } else {
                         AwesomeDialog(
                           dialogType: DialogType.warning,
                           context: context,
                           btnOkText: "အိုကေ",
-                          desc: "လျှို့ဝှက်နံပါတ် အနည်းဆုံး ၆ လုံးရှိရပါမည်",
+                          desc: "အချက်အလက်များ ပြည့်စုံစွာဖြည့်သွင်းပါ",
                           btnOkOnPress: () {},
                         ).show();
-                      } else {
-                        registerProvider.enableLoading();
-                        registerProvider.doRegister(
-                            registerProvider.nameController.text,
-                            registerProvider.phoneController.text,
-                            registerProvider.passwordController.text,
-                            registerProvider.addressController.text,
-                            buyerType,
-                            registerProvider.shopNameController.text,
-                            registerProvider.shopAddressController.text,
-                            context);
-                        if (kDebugMode) {
-                          print("Here is buyer type $buyerType");
-                        }
                       }
-                    } else {
-                      AwesomeDialog(
-                        dialogType: DialogType.warning,
-                        context: context,
-                        btnOkText: "အိုကေ",
-                        desc: "အချက်အလက်များ ပြည့်စုံစွာဖြည့်သွင်းပါ",
-                        btnOkOnPress: () {},
-                      ).show();
-                    }
-                  },
-                  width: MediaQuery.of(context).size.width,
-                  text: "",
-                  color: green,
-                  textColor: white,
+                    },
+                    width: MediaQuery.of(context).size.width,
+                    text: "",
+                    color:registerProvider.loading?green.withOpacity(0.5): green,
+                    textColor: white,
+                  ),
                 ),
                 const SizedBox(
                   height: 20,

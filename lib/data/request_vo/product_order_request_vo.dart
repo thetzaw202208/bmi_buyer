@@ -33,12 +33,14 @@ class Orders {
   DateTime? orderDate;
   String? deliveryAddress;
   String? phoneNo;
+  int? deliveryType;
 
   Orders({
     this.buyerId,
     this.orderDate,
     this.deliveryAddress,
     this.phoneNo,
+    this.deliveryType
   });
 
   factory Orders.fromJson(Map<String, dynamic> json) => Orders(
@@ -46,6 +48,7 @@ class Orders {
     orderDate: json["order_date"] == null ? null : DateTime.parse(json["order_date"]),
     deliveryAddress: json["delivery_address"],
     phoneNo: json["phone_no"],
+    deliveryType: json["delivery_type"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -53,6 +56,7 @@ class Orders {
     "order_date": orderDate?.toIso8601String(),
     "delivery_address": deliveryAddress,
     "phone_no": phoneNo,
+    "delivery_type": deliveryType,
   };
 }
 

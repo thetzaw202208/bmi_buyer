@@ -27,7 +27,7 @@ class ReusableTextField extends StatelessWidget {
         this.hintColor,
         this.textInputAction,
         this.autoFocus,
-        this.onSubmitted});
+        this.onSubmitted, this.onEditingComplete});
 
   final TextEditingController? textEditingController;
   final InputDecoration? inputDecoration;
@@ -39,6 +39,7 @@ class ReusableTextField extends StatelessWidget {
   final double? height;
   final Function(String)? onChanged;
   final Function(String)? onSubmitted;
+  final Function()? onEditingComplete;
   final String? hintText;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
@@ -55,6 +56,7 @@ class ReusableTextField extends StatelessWidget {
     return SizedBox(
       height: height ?? 50,
       child: TextField(
+        onEditingComplete: onEditingComplete,
         onSubmitted: onSubmitted,
         textInputAction: textInputAction ?? TextInputAction.done,
         style: const TextStyle(fontWeight: FontWeight.bold),

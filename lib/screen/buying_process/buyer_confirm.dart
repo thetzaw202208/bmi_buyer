@@ -308,7 +308,7 @@ class _BuyerConfirmScreenState extends State<BuyerConfirmScreen> {
                           orderDate: DateTime.now(),
                           deliveryAddress: widget.deliveryAddress,
                           phoneNo: widget.phone,
-                      deliveryType: value.pickDeliList[value.selectedPickDeli].id),
+                      deliveryType:widget.hasDeli==1? value.pickDeliList[value.selectedPickDeli].id:2),
                       value.productsRequest,
                       context);
                 });

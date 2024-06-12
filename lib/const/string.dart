@@ -1,2 +1,2 @@
 const String version='1.0.0';
-const String buildNumber='21';
+const String buildNumber='22';
